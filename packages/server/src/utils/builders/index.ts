@@ -183,7 +183,11 @@ export const mechanizeDockerContainer = async (
 		});
 	} catch (error) {
 		console.log(error);
-		await docker.createService(settings.authconfig, settings);
+		if (settings.authconfig) {
+			await docker.createService(settings.authconfig, settings);
+		} else {
+			await docker.createService(settings);
+		}
 	}
 };
 
